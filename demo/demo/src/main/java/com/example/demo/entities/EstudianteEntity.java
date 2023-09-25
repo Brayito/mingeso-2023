@@ -18,7 +18,6 @@ public class EstudianteEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
-    private Long id;
     private String rut;
     private String apellidos;
     private String nombres;

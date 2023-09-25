@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>anadir estudiante</title>
+</head>
+<style>
+  .formcontainer {
+      text-align: left;
+      margin: 24px 50px 12px;
+    }
+    .container {
+      padding: 16px 0;
+      text-align:left;
+</style>
+<body>
+      <form th:action="@{/nuevo-estudiante}" method ="POST">
+        <h1><b>Registar nuevo estudiante</b></h1>
+        <div class="formcontainer">
+          <div>
+          <label><strong>Rut</strong></label>
+          <input type="text" name="rut" id="rut" placeholder="Escriba el rut" size="20">
+          </div>
+          <div>
+          <label><strong>Apellidos</strong></label>
+          <input type="text" name="apellidos" id="apellidos" placeholder="Escriba los apellidos" size="20" required>
+          </div>
+          <div>
+          <label><strong>Nombres</strong></label>
+          <input type="text" name="nombres" id="nombres" placeholder="Escriba los nombres" size="20" required>
+          </div>
+          <div>
+          <label><strong>Fecha de Nacimiento</strong></label>
+          <input type="date" name="fechaNacimiento" id="fechaNacimiento" placeholder="Escriba fecha de nacimiento (AAAA-MM-DD" size="20" required>
+          </div>
+          <div>
+          <label><strong>Tipo de colegio</strong></label>
+          <input type="text" name="tipoColegio" id="tipoColegio" placeholder="Escriba el tipo de colegio (municipal - subvencionado - privado" required>
+          </div>
+          <div>
+          <label><strong>Nombre de colegio</strong></label>
+          <input type="text" name="nombreColegio" id="nombreColegio" placeholder="Escriba el nombre del colegio" size="20" required>
+          </div>
+          <div>
+          <label><strong>Año de egreso</strong></label>
+          <input type="text" name="anoEgreso" id="anoEgreso" placeholder="Escriba el año de egreso" size="20" required>
+          </div>
+          <button type="submit">Registrar estudiante</button>
+
+
+        </div>
+
+      </form>
+      <a class="btn" href="/"><button>Volver al menú principal</button></a>
+</body>
+</html>
