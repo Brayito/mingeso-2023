@@ -25,6 +25,8 @@ public class EstudianteService {
         estudianteRepository.save(estudiante);
     }
 
+
+
     public ArrayList<EstudianteEntity> obtenerEstudiantes(){
         return (ArrayList<EstudianteEntity>) estudianteRepository.findAll();
     }

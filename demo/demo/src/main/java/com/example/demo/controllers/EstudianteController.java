@@ -17,18 +17,11 @@ public class EstudianteController {
     @Autowired
     EstudianteService estudianteService;
 
-    @GetMapping("/listar")
-    public String listar(Model model) {
+    @GetMapping("/lista-estudiantes")
+    public String listaEstudiantes(Model model) {
         ArrayList<EstudianteEntity>estudiantes=estudianteService.obtenerEstudiantes();
         model.addAttribute("estudiantes", estudiantes);
-        return "index";
-    }
-
-    @GetMapping("/anadir")
-    public String anadir(Model model) {
-        ArrayList<EstudianteEntity>estudiantes=estudianteService.obtenerEstudiantes();
-        model.addAttribute("estudiantes", estudiantes);
-        return "nuevo-estudiante";
+        return "lista-estudiantes";
     }
 
     @GetMapping("/nuevo-estudiante")
