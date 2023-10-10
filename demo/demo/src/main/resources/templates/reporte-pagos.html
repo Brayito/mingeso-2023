@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang = "es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Listado de estudiantes</title>
-    <link rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-          crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <link rel = "stylesheet" href= "../static/css/navbar.css" type="text/css" th:href="@{/css/navbar.css}">
-    <style>
+  <meta charset="UTF-8">
+  <title>Listado pagos</title>
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <link rel = "stylesheet" href= "../static/css/navbar.css" type="text/css" th:href="@{/css/navbar.css}">
+  <style>
         *{
             font-family: sans-serif;
             box-sizing: border-box;
@@ -74,46 +74,49 @@
     </style>
 </head>
 <body>
-<header class="header">
-    <div class="logo">
-        <h1>Preuniversitario TopEducation</h1>
-    </div>
-    <nav>
-    </nav>
-    <a class="btn" href="/"><button>Volver al menú principal</button></a>
-    <a class="btn-2" href="/nuevo-estudiante"><button>Ingresar nuevo estudiante</button></a>
-</header>
 <div th:align = "center" class = "container my-2">
 
-    <h1><b> Listado de estudiantes</b></h1>
-    <table class="table">
-        <thead class="thead-dark">
-        <tr>
-            <th>Rut</th>
-            <th>Nombres</th>
-            <th>Apellidos</th>
-            <th>Nacimiento</th>
-            <th>Tipo Colegio</th>
-            <th>Nombre Colegio</th>
-            <th>Egreso</th>
-        </tr>
-        </thead>
-        <tbody>
-            <tr th:each="estudiante:${estudiantes}">
-                <td th:text="${estudiante.rut}"></td>
-                <td th:text="${estudiante.nombres}"></td>
-                <td th:text="${estudiante.apellidos}"></td>
-                <td th:text="${estudiante.fechanacimiento}"></td>
-                <td th:text="${estudiante.tipocolegio}"></td>
-                <td th:text="${estudiante.nombrecolegio}"></td>
-                <td th:text="${estudiante.anoegreso}"></td>
-            </tr>
-
-        </tbody>
-    </table>
+  <h1><b> Listado de reportes</b></h1>
+  <table class="table">
+    <thead class="thead-dark">
+    <tr>
+      <th>Rut</th>
+      <th>Nombre</th>
+      <th>Exámenes rendidos</th>
+      <th>Promedio Puntaje</th>
+      <th>Monto a pagar</th>
+      <th>Tipo pago</th>
+      <th>Total cuotas</th>
+      <th>Cuotas pactadas</th>
+      <th>Cuotas pagadas</th>
+      <th>Monto pagado</th>
+      <th>Último pago</th>
+      <th>Monto restante</th>
+      <th>Cuotas de retraso</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="reporte:${reportes}">
+      <td th:text="${reporte.rut}"></td>
+      <td th:text="${reporte.nombre}"></td>
+      <td th:text="${reporte.examenes_rendidos}"></td>
+      <td th:text="${reporte.promedio_puntaje}"></td>
+      <td th:text="${reporte.monto_pagar}"></td>
+      <td th:text="${reporte.tipo_pago}"></td>
+      <td th:text="${reporte.total_cuotas}"></td>
+      <td th:text="${reporte.cuotas_pactadas}"></td>
+      <td th:text="${reporte.cuotas_pagadas}"></td>
+      <td th:text="${reporte.monto_pagado}"></td>
+      <td th:text="${reporte.ultimo_pago}"></td>
+      <td th:text="${reporte.monto_restante}"></td>
+      <td th:text="${reporte.cuotas_retraso}"></td>
+    </tr>
+    </tbody>
+  </table>
 
 
 
 </div>
+
 </body>
 </html>

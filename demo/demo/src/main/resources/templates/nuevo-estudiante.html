@@ -34,8 +34,15 @@
           <input type="date" name="fechaNacimiento" id="fechaNacimiento" placeholder="Escriba fecha de nacimiento (AAAA-MM-DD" size="20" required>
           </div>
           <div>
-          <label><strong>Tipo de colegio</strong></label>
-          <input type="text" name="tipoColegio" id="tipoColegio" placeholder="Escriba el tipo de colegio (municipal - subvencionado - privado" required>
+            <label><strong>Tipo de colegio</strong></label><br>
+            <input type="radio" name="tipoColegio" id="municipal" value="Municipal" required>
+            <label for="municipal">Municipal</label><br>
+
+            <input type="radio" name="tipoColegio" id="subvencionado" value="Subvencionado" required>
+            <label for="subvencionado">Subvencionado</label><br>
+
+            <input type="radio" name="tipoColegio" id="privado" value="Privado" required>
+            <label for="privado">Privado</label><br>
           </div>
           <div>
           <label><strong>Nombre de colegio</strong></label>
@@ -48,9 +55,13 @@
           <button type="submit">Registrar estudiante</button>
 
 
+
         </div>
+
+
 
       </form>
       <a class="btn" href="/"><button>Volver al menú principal</button></a>
+      <a class="btn" href="/lista-estudiantes"><button>Volver atrás</button></a>
 </body>
 </html>
