@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cuotas subvencionado</title>
+</head>
+<style>
+  .formcontainer {
+      text-align: left;
+      margin: 24px 50px 12px;
+  }
+  .container {
+      padding: 16px 0;
+      text-align: left;
+  }
+</style>
+<body>
+<div>
+    <h1><b>Registar cuotas de nuevo estudiante</b></h1>
+    <form th:action="@{/asignar-cuotas-subvencionado}" method ="POST">
+        <div class="formcontainer">
+            <h2>El costo de matrícula es de $70.000 y el arancel tiene un valor de $1.350.000</h2>
+            <label><strong>Número máximo de cuotas</strong></label><br>
+            <input type="radio" name="max_cuotas" id="1" value=1 required>
+            <label for="1">1</label><br>
+
+            <input type="radio" name="max_cuotas" id="2" value=2 required>
+            <label for="2">2</label><br>
+
+            <input type="radio" name="max_cuotas" id="3" value=3 required>
+            <label for="3">3</label><br>
+
+            <input type="radio" name="max_cuotas" id="4" value=4 required>
+            <label for="4">4</label><br>
+
+            <input type="radio" name="max_cuotas" id="5" value=5 required>
+            <label for="5">5</label><br>
+
+            <input type="radio" name="max_cuotas" id="6" value=6 required>
+            <label for="6">6</label><br>
+
+            <input type="radio" name="max_cuotas" id="7" value=7 required>
+            <label for="7">7</label><br>
+
+        </div>
+    </form>
+</div>
+</body>
+</html>
