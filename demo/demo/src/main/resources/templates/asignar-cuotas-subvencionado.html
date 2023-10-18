@@ -19,6 +19,11 @@
     <h1><b>Registar cuotas de nuevo estudiante</b></h1>
     <form th:action="@{/asignar-cuotas-subvencionado}" method ="POST">
         <div class="formcontainer">
+            <h2>Por favor, selecciona tu rut</h2>
+            <input type="radio" name="rut" id="rut" value="" required>
+            <label for="rutGuardado"><span id="rutGuardado"></span></label><br>
+
+
             <h2>El costo de matrícula es de $70.000 y el arancel tiene un valor de $1.350.000</h2>
             <label><strong>Número máximo de cuotas</strong></label><br>
             <input type="radio" name="max_cuotas" id="1" value=1 required>
@@ -43,7 +48,25 @@
             <label for="7">7</label><br>
 
         </div>
+        <button type="submit" id="enviarDatos" >Registrar cuotas</button>
     </form>
 </div>
+
+<script>
+    var rutGuardado = localStorage.getItem('rutTemporal');
+    var rutInput = document.getElementById('rut');
+
+    // Asignar el valor del localStorage al radio button
+    rutInput.value = rutGuardado;
+
+    // Mostrar el valor en la etiqueta span
+    var rutGuardadoSpan = document.getElementById('rutGuardado');
+    if (rutGuardado) {
+        rutGuardadoSpan.textContent = rutGuardado;
+    } else {
+        rutGuardadoSpan.textContent = 'No hay valor guardado.';
+    }
+</script>
+
 </body>
 </html>

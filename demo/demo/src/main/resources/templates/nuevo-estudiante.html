@@ -2,38 +2,40 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>anadir estudiante</title>
+    <title>Añadir estudiante</title>
 </head>
 <style>
   .formcontainer {
       text-align: left;
       margin: 24px 50px 12px;
-    }
-    .container {
+  }
+  .container {
       padding: 16px 0;
-      text-align:left;
+      text-align: left;
+  }
 </style>
 <body>
-      <form th:action="@{/nuevo-estudiante}" method ="POST">
-        <h1><b>Registar nuevo estudiante</b></h1>
-        <div class="formcontainer">
-          <div>
-          <label><strong>Rut</strong></label>
-          <input type="text" name="rut" id="rut" placeholder="Escriba el rut" size="20">
-          </div>
-          <div>
-          <label><strong>Apellidos</strong></label>
-          <input type="text" name="apellidos" id="apellidos" placeholder="Escriba los apellidos" size="20" required>
-          </div>
-          <div>
-          <label><strong>Nombres</strong></label>
-          <input type="text" name="nombres" id="nombres" placeholder="Escriba los nombres" size="20" required>
-          </div>
-          <div>
-          <label><strong>Fecha de Nacimiento</strong></label>
-          <input type="date" name="fechaNacimiento" id="fechaNacimiento" placeholder="Escriba fecha de nacimiento (AAAA-MM-DD" size="20" required>
-          </div>
-          <div>
+<form th:action="@{/nuevo-estudiante}" method="POST">
+    <h1><b>Registrar nuevo estudiante</b></h1>
+    <div class="formcontainer">
+        <div>
+            <label><strong>Rut</strong></label>
+            <input type="text" name="rut" id="rut" placeholder="Escriba el rut" size="20">
+
+        </div>
+        <div>
+            <label><strong>Apellidos</strong></label>
+            <input type="text" name="apellidos" id="apellidos" placeholder="Escriba los apellidos" size="20" required>
+        </div>
+        <div>
+            <label><strong>Nombres</strong></label>
+            <input type="text" name="nombres" id="nombres" placeholder="Escriba los nombres" size="20" required>
+        </div>
+        <div>
+            <label><strong>Fecha de Nacimiento</strong></label>
+            <input type="date" name="fechaNacimiento" id="fechaNacimiento" placeholder="Escriba fecha de nacimiento (AAAA-MM-DD)" size="20" required>
+        </div>
+        <div>
             <label><strong>Tipo de colegio</strong></label><br>
             <input type="radio" name="tipoColegio" id="municipal" value="Municipal" required>
             <label for="municipal">Municipal</label><br>
@@ -43,25 +45,48 @@
 
             <input type="radio" name="tipoColegio" id="privado" value="Privado" required>
             <label for="privado">Privado</label><br>
-          </div>
-          <div>
-          <label><strong>Nombre de colegio</strong></label>
-          <input type="text" name="nombreColegio" id="nombreColegio" placeholder="Escriba el nombre del colegio" size="20" required>
-          </div>
-          <div>
-          <label><strong>Año de egreso</strong></label>
-          <input type="text" name="anoEgreso" id="anoEgreso" placeholder="Escriba el año de egreso" size="20" required>
-          </div>
-          <button type="submit">Registrar estudiante</button>
-
-
-
         </div>
+        <div>
+            <label><strong>Nombre de colegio</strong></label>
+            <input type="text" name="nombreColegio" id="nombreColegio" placeholder="Escriba el nombre del colegio" size="20" required>
+        </div>
+        <div>
+            <label><strong>Año de egreso</strong></label>
+            <input type="text" name="anoEgreso" id="anoEgreso" placeholder="Escriba el año de egreso" size="20" required>
+        </div>
+        <button type="submit" id="enviarDatos" >Registrar estudiante </button>
+    </div>
+</form>
+<a class="btn" href="/"><button>Volver al menú principal</button></a>
+<a class="btn" href="/lista-estudiantes"><button>Volver atrás</button></a>
 
+<script>
+    // Obtener el campo de entrada de rut
+    var rutInput = document.getElementById('rut');
 
+    // Escuchar el evento 'input' para guardar el valor en localStorage
+    rutInput.addEventListener('input', function () {
+        var rutValue = rutInput.value;
+        localStorage.setItem('rutTemporal', rutValue);
+    });
 
-      </form>
-      <a class="btn" href="/"><button>Volver al menú principal</button></a>
-      <a class="btn" href="/lista-estudiantes"><button>Volver atrás</button></a>
+    document.getElementById('enviarDatos').addEventListener('click', function () {
+        // Redirigir a la vista de tipo de colegio
+        var tipoColegio = document.querySelector('input[name="tipoColegio"]:checked');
+        if (tipoColegio) {
+            switch (tipoColegio.value) {
+                case 'Municipal':
+                    window.location.href = 'asignar-cuotas-municipal';
+                    break;
+                case 'Subvencionado':
+                    window.location.href = 'asignar-cuotas-subvencionado';
+                    break;
+                case 'Privado':
+                    window.location.href = 'asignar-cuotas-privado';
+                    break;
+            }
+        }
+    });
+</script>
 </body>
 </html>

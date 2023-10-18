@@ -86,7 +86,6 @@
       <th>Promedio Puntaje</th>
       <th>Monto a pagar</th>
       <th>Tipo pago</th>
-      <th>Total cuotas</th>
       <th>Cuotas pactadas</th>
       <th>Cuotas pagadas</th>
       <th>Monto pagado</th>
@@ -103,7 +102,6 @@
       <td th:text="${reporte.promedio_puntaje}"></td>
       <td th:text="${reporte.monto_pagar}"></td>
       <td th:text="${reporte.tipo_pago}"></td>
-      <td th:text="${reporte.total_cuotas}"></td>
       <td th:text="${reporte.cuotas_pactadas}"></td>
       <td th:text="${reporte.cuotas_pagadas}"></td>
       <td th:text="${reporte.monto_pagado}"></td>
@@ -113,7 +111,8 @@
     </tr>
     </tbody>
   </table>
-
+  <a class="btn" href="/"><button>Volver al menú principal</button></a>
+  <a class="btn" href="/lista-estudiantes"><button>Volver al lista de estudiantes</button></a>
 
 
 </div>

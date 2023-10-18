@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import com.example.demo.entities.CuotasEntity;
 import com.example.demo.entities.EstudianteEntity;
 import com.example.demo.entities.ReporteEntity;
 import com.example.demo.repositories.ReporteRepository;
@@ -16,6 +17,9 @@ public class ReporteService {
 
     @Autowired
     EstudianteService estudianteService;
+
+    @Autowired
+    CuotasService cuotasService;
 
 
     public ArrayList<ReporteEntity> obtenerReportes(){
@@ -35,21 +39,33 @@ public class ReporteService {
 
     public void calculoPlanilla(String rut){
         if (rut != null){
+
             EstudianteEntity estudianteActual = estudianteService.estudianteRepository.findByRut(rut);
-            System.out.println("Entrando al estudiante mediante rut: " + rut);
-            ReporteEntity estudianteReporte = new ReporteEntity();
-            estudianteReporte.setRut(estudianteActual.getRut());
-            estudianteReporte.setNombre(estudianteActual.getNombres() + " " + estudianteActual.getApellidos());
-            estudianteReporte.setMonto_pagar(1500000 - 1500000*calcularDescuentoArancel(estudianteActual.getTipocolegio(),estudianteActual.getAnoegreso(),"Cuotas"));
-            estudianteReporte.setCuotas_retraso(0);
-            estudianteReporte.setCuotas_pagadas(0);
-            estudianteReporte.setCuotas_pactadas(0);
-            estudianteReporte.setExamenes_rendidos(0);
-            estudianteReporte.setTipo_pago("Cuotas");
-            estudianteReporte.setMonto_pagado(0);
-            estudianteReporte.setMonto_restante(0);
-            estudianteReporte.setUltimo_pago(new Date());
-            reporteRepository.save(estudianteReporte);
+            CuotasEntity cuotasActual = cuotasService.cuotasRepository.findByRut(rut);
+            if (estudianteActual != null && cuotasActual != null) {
+                System.out.println("Entrando al estudiante mediante rut: " + rut);
+                ReporteEntity estudianteReporte = new ReporteEntity();
+                estudianteReporte.setRut(estudianteActual.getRut());
+                estudianteReporte.setNombre(estudianteActual.getNombres() + " " + estudianteActual.getApellidos());
+                if (cuotasActual.getMax_cuotas() == 1) {
+                    estudianteReporte.setTipo_pago("Contado");
+                } else {
+                    estudianteReporte.setTipo_pago("Cuotas");
+                }
+                estudianteReporte.setMonto_pagar(cuotasActual.getArancel() - cuotasActual.getArancel() * calcularDescuentoArancel(estudianteActual.getTipocolegio(), estudianteActual.getAnoegreso(),estudianteReporte.getTipo_pago()));
+                System.out.println("Estudiante o cuotas no encontrados para el rut: " + rut +" gracias a descuento: " + calcularDescuentoArancel(estudianteActual.getTipocolegio(), estudianteActual.getAnoegreso(), estudianteReporte.getTipo_pago()));
+                estudianteReporte.setCuotas_retraso(0);
+                estudianteReporte.setCuotas_pagadas(cuotasActual.getCuotas_pagadas());
+                estudianteReporte.setCuotas_pactadas(cuotasActual.getMax_cuotas());
+                estudianteReporte.setExamenes_rendidos(0);
+
+                estudianteReporte.setMonto_pagado(cuotasActual.getCuotas_pagadas() * cuotasActual.getMonto_cuota());
+                estudianteReporte.setMonto_restante(estudianteReporte.getMonto_pagar() - (estudianteReporte.getMonto_pagado()));
+                estudianteReporte.setUltimo_pago(new Date());
+                reporteRepository.save(estudianteReporte);
+            }else{
+                System.out.println("Estudiante o cuotas no encontrados para el rut: " + rut);
+            }
         }else{
             System.out.println("rut = null");
         }
@@ -83,9 +99,11 @@ public class ReporteService {
         double descuentos = 0.0;
         switch (TipoPago) {
             case "Contado":
+                System.out.println("Probando caso contado");
                 descuentos = 0.5;
                 return descuentos;
             case "Cuotas":
+                System.out.println("Probando caso cuotas");
                 switch (TipoColegio) {
                     case "Municipal":
                         descuentos = 0.2;
@@ -97,6 +115,7 @@ public class ReporteService {
                         descuentos = 0.0;
                         break;
                 }
+                System.out.println("Probando if ano egreso");
                 if (anoEgreso < 1) {
                     descuentos = descuentos + 0.15;
                 } else if (anoEgreso >= 1 && anoEgreso <= 2) {
