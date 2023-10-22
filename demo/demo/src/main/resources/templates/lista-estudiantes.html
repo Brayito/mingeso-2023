@@ -108,6 +108,7 @@
                 <td th:text="${estudiante.tipocolegio}"></td>
                 <td th:text="${estudiante.nombrecolegio}"></td>
                 <td th:text="${estudiante.anoegreso}"></td>
+                <td><a th:href="@{'/perfil/' + ${estudiante.rut}}">Ver Perfil</a></td>
             </tr>
 
         </tbody>

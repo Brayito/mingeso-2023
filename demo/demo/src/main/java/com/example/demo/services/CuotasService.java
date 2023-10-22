@@ -54,6 +54,17 @@ public class CuotasService {
         }
     }
 
+    public void aceptarPagoCuota(String rut, Integer cuotasPagadas, Integer cuotasPorPagar){
+        CuotasEntity cuotas = cuotasRepository.findByRut(rut);
+        cuotas.setCuotas_pagadas(cuotasPagadas);
+        cuotas.setCuotas_por_pagar(cuotasPorPagar);
+        cuotasRepository.save(cuotas);
+    }
+    public CuotasEntity obtenerCuotasPorRut(String rut){
+        CuotasEntity cuotas = cuotasRepository.findByRut(rut);
+        return cuotas;
+    }
+
     public ArrayList<CuotasEntity> obtenerCuotas(){
         return (ArrayList<CuotasEntity>) cuotasRepository.findAll();
     }

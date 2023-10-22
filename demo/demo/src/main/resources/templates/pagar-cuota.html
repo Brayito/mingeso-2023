@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pagar cuota</title>
+</head>
+<body>
+<h1>Cuotas del Estudiante</h1>
+<p>Rut: <span th:text="${cuotas.rut}"></span></p>
+<p>Cuotas a pagar: <span th:text="${cuotas.max_cuotas}"></span></p>
+<p>Cuotas pagadas: <span th:text="${cuotas.cuotas_pagadas}"></span></p>
+<p>Cuotas por pagar: <span th:text="${cuotas.cuotas_por_pagar}"></span></p>
+<p>Monto de cuota: <span th:text="${cuotas.monto_cuota}"></span></p>
+<form method="post" th:action="@{'/perfil/pagar-cuota/' + ${cuotas.rut}}">
+    <button type="submit">Pagar 1 cuota</button>
+</form>
+</body>
+</html>

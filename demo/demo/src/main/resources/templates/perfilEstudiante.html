@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Perfil del Estudiante</title>
+</head>
+<body>
+<h1>Perfil del Estudiante</h1>
+<p>Rut: <span th:text="${cuotas.rut}"></span></p>
+<p>Arancel total: <span th:text="${cuotas.arancel}"></span></p>
+<p>Cuotas a pagar: <span th:text="${cuotas.max_cuotas}"></span></p>
+<p>Cuotas pagadas: <span th:text="${cuotas.cuotas_pagadas}"></span></p>
+
+<th:block th:if="${cuotas.cuotas_pagadas < cuotas.max_cuotas}">
+    <a class="btn" th:href="@{'/perfil/pagar-cuota/' + ${cuotas.rut}}">
+        <button>Pagar 1 cuota</button></a>
+
+    </a>
+</th:block>
+
+
+
+</body>
+</html>

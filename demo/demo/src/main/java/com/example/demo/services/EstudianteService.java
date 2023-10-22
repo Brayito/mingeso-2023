@@ -31,6 +31,10 @@ public class EstudianteService {
 
     }
 
+    public EstudianteEntity obtenerEstudiantePorRut(String rut){
+        EstudianteEntity estudiante = estudianteRepository.findByRut(rut);
+        return estudiante;
+    }
 
 
     public ArrayList<EstudianteEntity> obtenerEstudiantes(){

@@ -7,10 +7,7 @@ import com.example.demo.services.CuotasService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -76,4 +73,34 @@ public class CuotasController {
         cuotasService.guardarCuotas(rut,max_cuotas);
         return "redirect:/lista-estudiantes";
     }
+
+    @GetMapping("/perfil/{rut}")
+    public String verPerfilEstudiante(@PathVariable String rut, Model model) {
+        CuotasEntity cuotas = cuotasService.obtenerCuotasPorRut(rut);
+        model.addAttribute("cuotas", cuotas);
+
+        return "perfilEstudiante";
+    }
+
+
+    @GetMapping("/perfil/pagar-cuota/{rut}")
+    public String mostrarFormularioPagoCuota(@PathVariable String rut, Model model) {
+        CuotasEntity cuotas = cuotasService.obtenerCuotasPorRut(rut);
+        model.addAttribute("cuotas", cuotas);
+        return "pagar-cuota";
+    }
+
+
+    @PostMapping("/perfil/pagar-cuota/{rut}")
+    public String pagarCuota(@PathVariable String rut, Model model){
+        CuotasEntity cuotas = cuotasService.obtenerCuotasPorRut(rut);
+        if(cuotas != null){
+            int cuotasPagadas = cuotas.getCuotas_pagadas() + 1;
+            int cuotasPorPagar = cuotas.getCuotas_por_pagar() - 1;
+            cuotasService.aceptarPagoCuota(rut,cuotasPagadas, cuotasPorPagar);
+        }
+        model.addAttribute("cuotas", cuotas);
+        return "redirect:/perfil/{rut}";
+    }
+
 }
